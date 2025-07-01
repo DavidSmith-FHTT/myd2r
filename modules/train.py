@@ -92,6 +92,7 @@ class MSDTrainer(BaseTrainer):
         vision_names, text_names = [], []
         model_dict = self.model.state_dict()
 
+        # 在 model_dict 中替换 vision 和 text 模型部分的内容，分别从 clip_model_dict 和 bert_model_dict 中加载相关参数
         for name in model_dict:
             if 'vision' in name:
                 clip_name = name.replace('vision_', '').replace('model.', '')
@@ -147,7 +148,7 @@ class MSDTrainer(BaseTrainer):
             self.test(epoch)
 
             # 递归删除文件夹
-            shutil.rmtree("./output")
+            # shutil.rmtree("./output")
 
             torch.cuda.empty_cache()
             pbar.close()

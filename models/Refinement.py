@@ -121,6 +121,9 @@ class CrossModalAlignment(nn.Module):
 
 
 class Refinement(nn.Module):
+    """
+    使用相关的视觉信息增强文本表征，同时保留原始文本语义。
+    """
     def __init__(self, args, embed_size, raw_feature_norm, lambda_softmax):
         super(Refinement, self).__init__()
         self.raw_feature_norm = raw_feature_norm

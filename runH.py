@@ -43,7 +43,7 @@ def main():
     parser.add_argument('--eval_begin_epoch', default=1, type=int, help="epoch to start evluate")
     parser.add_argument('--seed', default=2023, type=int, help="random seed, default is 1")
     parser.add_argument('--load_path', default=None, type=str, help="Load model from load_path")
-    parser.add_argument('--save_path', default='./output/HFM/', type=str, help="save best model at save_path")
+    parser.add_argument('--save_path', default='/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/HFM/', type=str, help="save best model at save_path")
     parser.add_argument('--write_path', default=None, type=str,
                         help="do_test=True, predictions will be write in write_path")
     parser.add_argument('--notes', default="", type=str, help="input some remarks for making save path dir.")

@@ -361,6 +361,9 @@ class TextBasedGlobalLocalCell(nn.Module):
 
 
 class DUAL(nn.Module):
+    """
+    无用代码
+    """
     def __init__(self, args):
         super(DUAL, self).__init__()
         self.args = args
@@ -432,6 +435,9 @@ class VisionBasedDualUnit(nn.Module):
 
 
 class CrossModalFusionUnit(nn.Module):
+    """
+    无用代码
+    """
     def __init__(self, args):
         super(CrossModalFusionUnit, self).__init__()
         self.args = args

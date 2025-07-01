@@ -3,14 +3,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 import copy
 import pickle
-
 from models.Cells import RectifiedIdentityCell, IntraModelReasoningCell, GlobalLocalGuidanceCell, CrossModalRefinementCell, GlobalLocalAlignmentCell, ContextRichCrossModalCell, GlobalEnhancedSemanticCell
+
 
 def unsqueeze2d(x):
     return x.unsqueeze(-1).unsqueeze(-1)
 
+
 def unsqueeze3d(x):
     return x.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
+
 
 def clones(module, N):
     '''Produce N identical layers.'''
@@ -18,6 +20,9 @@ def clones(module, N):
 
 
 class DynamicInteraction_Layer0(nn.Module):
+    """
+    Dynamic Sentiment Interaction Module(以文本为中心) 的第一层
+    """
     def __init__(self, args, num_cell, num_out_path):
         super(DynamicInteraction_Layer0, self).__init__()
         self.args = args
@@ -36,6 +41,7 @@ class DynamicInteraction_Layer0(nn.Module):
 
     def forward(self, text, image):
 
+        # 首先通过六个不同的处理单元处理输入
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
         emb_lst[0], path_prob[0] = self.ric(text)
@@ -43,15 +49,16 @@ class DynamicInteraction_Layer0(nn.Module):
         emb_lst[1], path_prob[1] = self.glac(text, image)
         emb_lst[2], path_prob[2] = self.imrc(text)
         emb_lst[3], path_prob[3] = self.cmrc(text, image)
-
         emb_lst[4], path_prob[4] = self.crcmc(text, image)
         emb_lst[5], path_prob[5] = self.gesc(text, image)
 
+        # 计算门控掩码并将所有路径概率堆叠并进行归一化，确保概率和为1
         gate_mask = (sum(path_prob) < self.threshold).float() 
-        all_path_prob = torch.stack(path_prob, dim=2)  
-        all_path_prob = all_path_prob / (all_path_prob.sum(dim=-1, keepdim=True) + self.eps)     # (bsz, 4, 4)
-        path_prob = [all_path_prob[:, :, i] for i in range(all_path_prob.size(2))]
+        all_path_prob = torch.stack(path_prob, dim=2)
+        all_path_prob = all_path_prob / (all_path_prob.sum(dim=-1, keepdim=True) + self.eps)     # (64, 6, 6) -> (batch_size, path_prob_dim, num_cell)
+        path_prob = [all_path_prob[:, :, i] for i in range(all_path_prob.size(2))]  # list{6} -> (64, 6)
 
+        # 通过加权聚合生成最终输出
         aggr_res_lst = []
         for i in range(self.num_out_path):
             skip_emb = unsqueeze2d(gate_mask[:, i]) * emb_lst[0]    # (bsz, L, 768)
@@ -70,6 +77,9 @@ class DynamicInteraction_Layer0(nn.Module):
 
 
 class DynamicInteraction_Layer(nn.Module):
+    """
+    Dynamic Sentiment Interaction Module(以文本为中心) 的中间层和最后一层。
+    """
     def __init__(self, args, num_cell, num_out_path):
         super(DynamicInteraction_Layer, self).__init__()
         self.args = args
@@ -89,6 +99,7 @@ class DynamicInteraction_Layer(nn.Module):
 
     def forward(self, ref_wrd, text, image):
 
+        # 通过6个不同的处理单元并行处理输入数据，每个单元都会输出嵌入表示和路径概率：
         # assert len(ref_wrd) == self.num_cell and ref_wrd[0].dim() == 4
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
@@ -97,10 +108,10 @@ class DynamicInteraction_Layer(nn.Module):
         emb_lst[1], path_prob[1] = self.glac(ref_wrd[1], image)
         emb_lst[2], path_prob[2] = self.imrc(ref_wrd[2])
         emb_lst[3], path_prob[3] = self.cmrc(ref_wrd[3], image)
-
         emb_lst[4], path_prob[4] = self.crcmc(ref_wrd[4], image)
         emb_lst[5], path_prob[5] = self.gesc(ref_wrd[5], image)
-        
+
+        # num_out_path == 1 表示最后一层
         if self.num_out_path == 1:
             aggr_res_lst = []
             gate_mask_lst = []
@@ -134,10 +145,10 @@ class DynamicInteraction_Layer(nn.Module):
         return aggr_res_lst, all_path_prob
 
 
-
-
-
 class Reversed_DynamicInteraction_Layer0(nn.Module):
+    """
+    Dynamic Sentiment Interaction Module(以图片为中心) 的第一层
+    """
     def __init__(self, args, num_cell, num_out_path):
         super(Reversed_DynamicInteraction_Layer0, self).__init__()
         self.args = args
@@ -190,6 +201,9 @@ class Reversed_DynamicInteraction_Layer0(nn.Module):
 
 
 class Reversed_DynamicInteraction_Layer(nn.Module):
+    """
+    Dynamic Sentiment Interaction Module(以图片为中心) 的中间层和最后一层。
+    """
     def __init__(self, args, num_cell, num_out_path):
         super(Reversed_DynamicInteraction_Layer, self).__init__()
         self.args = args
@@ -252,5 +266,4 @@ class Reversed_DynamicInteraction_Layer(nn.Module):
                 aggr_res_lst.append(res)
 
         return aggr_res_lst, all_path_prob
-
 

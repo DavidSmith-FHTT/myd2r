@@ -54,6 +54,9 @@ class FeedForward(nn.Module):
 
 
 class SelfAttention(nn.Module):
+    """
+    SelfAttention
+    """
     def __init__(self, embed_size, hid_size, h, drop=0.0):
         super(SelfAttention, self).__init__()
         self.h = h

@@ -1,3 +1,6 @@
+"""
+BERT 与 CLIP 的相关代码
+"""
 import math
 import copy
 import torch
@@ -729,7 +732,6 @@ class UnimoEncoder(nn.Module):
                 attentions=all_vision_attentions)
 
 
-
 class UnimoModel(nn.Module):
     def __init__(self, args, vision_config, text_config, add_pooling_layer=True, num_self_layer=1):
         super().__init__()
@@ -753,26 +755,6 @@ class UnimoModel(nn.Module):
         self.self_vision = nn.ModuleList([CLIPEncoderLayer(vision_config) for _ in range(num_self_layer)])
         self.vision_cls_pool = BertPooler(vision_config)
 
-        # # MildTriple Loss
-        # self.mild_loss = SoftContrastiveLoss(alpha=args.beta, margin=args.mild_margin, max_violation=True,
-        #                                      threshold_hetero=args.hetero, threshold_homo=args.homo)
-        # self.fc_1 = nn.Linear(text_config.hidden_size, text_config.hidden_size)
-        # self.fc_2 = nn.Linear(text_config.hidden_size, text_config.hidden_size)
-
-        # self.diff_loss = DiffLoss(args)
-        # self.fc_text = nn.Sequential(
-        #     nn.Linear(args.max_seq, 50),
-        #     nn.ReLU(True),
-        #     nn.Linear(50, 50)
-        # )
-        # self.affine1 = nn.Parameter(torch.empty(size=(768, 768)))
-        # nn.init.xavier_uniform_(self.affine1.data, gain=1.414)
-        # self.affine2 = nn.Parameter(torch.empty(size=(768, 768)))
-        # nn.init.xavier_uniform_(self.affine2.data, gain=1.414)
-
-        # # SE-block
-        # self.SE_fusion = SELayer(channel=2, reduction=16)
-        # Bilinear Pooling
         self.block_fusion = Block([768, 768], 768)
 
         self.text_pool = BertPooler(text_config)
@@ -794,11 +776,23 @@ class UnimoModel(nn.Module):
                 output_attentions=None,
                 output_hidden_states=None,
                 return_dict=None):
-        # pre vision
+        """
+        Args:
+            input_ids：输入文本的 ID，通常是经过分词后的文本索引。
+            attention_mask：一个用于标记输入文本有效部分的掩码，通常是一个 0/1 的矩阵，1 表示有效，0 表示无效。
+            token_type_ids：用于区分不同文本类型的 ID，通常用于区分句子对（例如，BERT 中用于区分 A 和 B 两个句子的类型）。
+            position_ids：每个输入 token 的位置 ID，表示 token 在句子中的位置。
+            head_mask：头部的掩码，允许控制不同的自注意力头部。
+            pixel_values：输入的视觉数据，通常是图像数据。
+            output_attentions：一个布尔值，指示是否返回注意力权重。
+            output_hidden_states：一个布尔值，指示是否返回隐藏状态。
+            return_dict：一个布尔值，指示是否返回一个包含额外信息（如隐藏状态和注意力）的字典。
+        """
+        # 处理视觉数据
         vision_embedding_output = self.vision_embeddings(pixel_values)
         vision_embedding_output = self.vision_pre_layrnorm(vision_embedding_output)
 
-        # pre text
+        # 处理文本数据
         input_shape = input_ids.shape
         batch_size, seq_length = input_shape
         device = input_ids.device
@@ -824,22 +818,23 @@ class UnimoModel(nn.Module):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict)
 
+        # 获取编码后的文本和视觉特征
         text_encode_out = encoder_text_out.last_hidden_state
         vision_encode_out = encoder_vision_out.last_hidden_state
 
-        # Self-Attention
+        # 获取文本和视觉的CLS表示
         text_output = text_encode_out
         vision_output = vision_encode_out
-
         for text_layer_module in self.self_text:
             text_output = text_layer_module(text_output, extended_attention_mask, output_attentions=False)[0]
         text_cls_output = self.text_cls_pool(text_output)      # (32, 768)
-
         for vision_layer_module in self.self_vision:
             vision_output = vision_layer_module(vision_output, output_attentions=False)[0]
         vision_cls_output = self.vision_cls_pool(vision_output)       # (32, 768)
 
+        # InteractionModule
         sim_mat, sim_paths = self.itr_module(text_encode_out, vision_encode_out)
+        # Reversed_InteractionModule
         Reversed_sim_mat, Reversed_sim_paths = self.Reversed_itr_module(text_encode_out, vision_encode_out)
 
         sim_text = torch.matmul(text_cls_output, text_cls_output.transpose(-1, -2))   # (bsz, bsz)
@@ -848,43 +843,12 @@ class UnimoModel(nn.Module):
         # JS散度 -> 双向KL散度    (bsz, bsz)
         js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
 
-        # # MildTriple Loss     文本、图片  false negative
-        # mild_loss = self.mild_loss(torch.nn.functional.normalize(self.fc_1(text_cls_output)),
-        #                      torch.nn.functional.normalize(self.fc_2(sim_paths.squeeze(-2))))
-
-        # # (bsz, 50, 768)
-        # diff_loss = self.args.weight_diff * self.diff_loss(self.fc_text(sim_mat[0].transpose(-1, -2)).transpose(-1, -2),
-        #                                                    Reversed_sim_mat[0])
-        #
-        # # BiAffine
-        # A1 = F.softmax(torch.bmm(torch.matmul(sim_mat[0], self.affine1), torch.transpose(Reversed_sim_mat[0], 1, 2)),
-        #                dim=-1)
-        # A2 = F.softmax(torch.bmm(torch.matmul(Reversed_sim_mat[0], self.affine2), torch.transpose(sim_mat[0], 1, 2)),
-        #                dim=-1)
-        #
-        # sim_mat_new = torch.bmm(A1, Reversed_sim_mat[0])
-        # Reversed_sim_mat_new = torch.bmm(A2, sim_mat[0])
-
-        # diff_loss = 0
-
         # Fusion
         text_pooled_output = self.text_pool(sim_mat[0])  # (32, 768)
         image_pooled_output = self.vision_pool(Reversed_sim_mat[0])  # (32, 768)
 
-        # # SE-block    modality-wise attention
-        # combine_representation = torch.cat((text_pooled_output.unsqueeze(1), image_pooled_output.unsqueeze(1)), dim=1)  # (bsz, 2, 768)
-        #
-        # # (bsz, 2, 768)     (bsz, 2)
-        # combine_output, channel_weight = self.SE_fusion(combine_representation)
-        #
-        # # (bsz, 768)
-        # output = torch.sum(combine_output, dim=1)
-
         # (bsz, 768)
         output = self.block_fusion([text_pooled_output, image_pooled_output])
-
-        # # Pooler for classification
-        # pooled_out_text = self.text_pooler(sim_mat[0])
 
         return BaseModelOutputWithPooling(
             last_hidden_state=encoder_text_out.last_hidden_state,

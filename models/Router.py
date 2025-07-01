@@ -16,6 +16,10 @@ class Router(nn.Module):
     return: 路径概率向量 p_m^(n-1)
     """
     def __init__(self, num_out_path, embed_size, hid):
+        """
+        Args:
+            num_out_path: 路由的输出维度
+        """
         super(Router, self).__init__()
         self.num_out_path = num_out_path
         self.mlp = nn.Sequential(nn.Linear(embed_size, hid),

@@ -9,7 +9,7 @@ import numpy as np
 from torch.distributions import Normal, Independent
 from torch.nn.functional import softplus
 
-device = torch.device("cuda:0")
+device = torch.device("cuda:1")
 
 def l2norm(X, dim=-1, eps=1e-8):
     """L2-normalize columns of X"""
@@ -29,7 +29,7 @@ def cosine_sim(mm, s):
     return mm.mm(s.t())
 
 
-def  js_div(p_output, q_output, get_softmax=True):
+def js_div(p_output, q_output, get_softmax=True):
     """
     Function that measures JS divergence between target and output logits:
     """
