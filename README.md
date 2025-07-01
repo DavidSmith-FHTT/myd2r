@@ -1,9 +1,5 @@
 # D2R
 
-This is the official implementation of the paper "D2R: Dual-Branch Dynamic Routing Network for Multimodal Sentiment Detection", which is accepted by EMNLP 2024. 
-(https://aclanthology.org/2024.emnlp-main.207/)
-
-
 ## Environment Requirements
 
 The experiments were conducted on a single GeForce RTX 3090 GPU with 24GB memory. 
