@@ -18,7 +18,7 @@ from transformers.modeling_outputs import (
 )
 import torch.nn.functional as F
 
-from models.XModules import SelfEncoder, CrossModalAlignment, GraphReasoning, SELayer, l2norm, SoftContrastiveLoss, AmbiguityLearning, js_div, Block, DiffLoss
+from models.XModules import js_div, Block
 
 from models.InteractionModule import InteractionModule, Reversed_InteractionModule
 
@@ -530,32 +530,6 @@ class BertPooler(nn.Module):
         return pooled_output
 
 
-class GraphConvolution(nn.Module):
-    """
-    Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
-    """
-
-    def __init__(self, in_features, out_features, bias=True):
-        super(GraphConvolution, self).__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        self.weight = nn.Parameter(torch.FloatTensor(in_features, out_features))
-        if bias:
-            self.bias = nn.Parameter(torch.FloatTensor(out_features))
-        else:
-            self.register_parameter('bias', None)
-
-    def forward(self, text, adj):
-        text = text.to(torch.float32)
-        hidden = torch.matmul(text, self.weight)
-        denom = torch.sum(adj, dim=2, keepdim=True) + 1
-        output = torch.matmul(adj, hidden) / denom
-        if self.bias is not None:
-            return output + self.bias
-        else:
-            return output
-
-
 # CrossAttention Part
 class BertCoAttention(nn.Module):
     def __init__(self, config):
@@ -765,17 +739,8 @@ class UnimoModel(nn.Module):
 
         self.text_pooler = BertPooler(text_config) if add_pooling_layer else None
 
-    def forward(self,
-                input_ids=None,
-                attention_mask=None,
-                token_type_ids=None,
-                position_ids=None,
-                head_mask=None,
-
-                pixel_values=None,
-                output_attentions=None,
-                output_hidden_states=None,
-                return_dict=None):
+    def forward(self, input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
+                pixel_values=None, output_attentions=None, output_hidden_states=None, return_dict=None):
         """
         Args:
             input_ids：输入文本的 ID，通常是经过分词后的文本索引。

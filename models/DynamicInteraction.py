@@ -3,21 +3,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 import copy
 import pickle
-from models.Cells import RectifiedIdentityCell, IntraModelReasoningCell, GlobalLocalGuidanceCell, CrossModalRefinementCell, GlobalLocalAlignmentCell, ContextRichCrossModalCell, GlobalEnhancedSemanticCell
+from models.Cells import RectifiedIdentityCell, IntraModelReasoningCell, CrossModalRefinementCell, GlobalLocalAlignmentCell, ContextRichCrossModalCell, GlobalEnhancedSemanticCell
 
 
 def unsqueeze2d(x):
     return x.unsqueeze(-1).unsqueeze(-1)
-
-
-def unsqueeze3d(x):
-    return x.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
-
-
-def clones(module, N):
-    '''Produce N identical layers.'''
-    return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
-
 
 class DynamicInteraction_Layer0(nn.Module):
     """
