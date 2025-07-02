@@ -9,6 +9,7 @@ from models.Cells import RectifiedIdentityCell, IntraModelReasoningCell, CrossMo
 def unsqueeze2d(x):
     return x.unsqueeze(-1).unsqueeze(-1)
 
+
 class DynamicInteraction_Layer0(nn.Module):
     """
     Dynamic Sentiment Interaction Module(以文本为中心) 的第一层

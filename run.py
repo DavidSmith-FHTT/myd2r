@@ -4,15 +4,11 @@ import logging
 import torch
 import numpy as np
 import random
-from time import strftime, localtime
-from torchvision import transforms
 from models.unimo_model import UnimoModelF
 from processor.dataset import MSDProcessor, MSDDataset
 from modules.train import MSDTrainer
 from torch.utils.data import DataLoader
 from transformers import BertConfig, CLIPConfig, BertModel, CLIPProcessor, CLIPModel
-import fitlog
-import warnings
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -83,20 +79,6 @@ def main():
         'test': 'data/MVSA-single/10-flod-1/test.json'
     }
     img_path = 'data/MVSA-single/data'
-
-    # data_path = {
-    #     'train': 'data/MVSA-multiple/10-flod-1/train.json',
-    #     'dev': 'data/MVSA-multiple/10-flod-1/dev.json',
-    #     'test': 'data/MVSA-multiple/10-flod-1/test.json'
-    # }
-    # img_path = 'data/MVSA-multiple/data'
-
-    # data_path = {
-    #     'train': 'data/HFM/train.json',
-    #     'dev': 'data/HFM/valid.json',
-    #     'test': 'data/HFM/test.json'
-    # }
-    # img_path = 'data/HFM/dataset_image'
 
     data_process, dataset_class = (MSDProcessor, MSDDataset)
 

@@ -2,12 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
-import copy
-
 from torch.autograd import Variable
 import numpy as np
-from torch.distributions import Normal, Independent
-from torch.nn.functional import softplus
 
 device = torch.device("cuda:1")
 
@@ -26,12 +22,6 @@ def l1norm(X, dim, eps=1e-8):
     return X
 
 
-def cosine_sim(mm, s):
-    """Cosine similarity between all the motion and sentence pairs
-    """
-    return mm.mm(s.t())
-
-
 def js_div(p_output, q_output, get_softmax=True):
     """
     Function that measures JS divergence between target and output logits:
@@ -44,12 +34,10 @@ def js_div(p_output, q_output, get_softmax=True):
     return (KLDivLoss(log_mean_output, p_output) + KLDivLoss(log_mean_output, q_output)) / 2
 
 
-def clones(module, N):
-    '''Produce N identical layers.'''
-    return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
-
-
 class ContrastiveLoss(nn.Module):
+    """
+    下面的 CrossModalAlignment 用到了
+    """
     def __init__(self, alpha, beta, margin=0.2, measure='cosine', max_violation=True):
         super(ContrastiveLoss, self).__init__()
         self.alpha = alpha
@@ -108,6 +96,9 @@ class ContrastiveLoss(nn.Module):
 
 
 class CrossModalAlignment(nn.Module):
+    """
+    跨模态对齐，Cells 里面第五个第六个用到了。
+    """
     def __init__(self, config, args):
         super(CrossModalAlignment, self).__init__()
         self.config = config
@@ -162,12 +153,12 @@ class CrossModalAlignment(nn.Module):
 
 class AttentionFiltration(nn.Module):
     """
+    Cells 第五个单元用到 AttentionFiltration
     实现了一个基于门控注意力机制的相似性过滤模块。它的作用是对全局和局部对齐信息进行加权处理，输出经过注意力加权后的聚合结果。
     Perform the similarity Attention Filtration with a gate-based attention
     Args: - sim_emb: global and local alignments, shape: (batch_size, L+1, 256)
     Returns; - sim_saf: aggregated alignment after attention filtration, shape: (batch_size, 256)
     """
-
     def __init__(self, sim_dim):
         super(AttentionFiltration, self).__init__()
 
@@ -191,25 +182,6 @@ class AttentionFiltration(nn.Module):
             elif isinstance(m, nn.BatchNorm1d):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
-
-
-class Encoder(nn.Module):
-    def __init__(self, z_dim=2):
-        super(Encoder, self).__init__()
-        self.z_dim = z_dim
-        # Vanilla MLP
-        self.net = nn.Sequential(
-            nn.Linear(768, 768),
-            nn.ReLU(True),
-            nn.Linear(768, z_dim * 2),
-        )
-
-    def forward(self, x):
-        # x = x.view(x.size(0), -1)  # Flatten the input
-        params = self.net(x)
-        mu, sigma = params[:, :self.z_dim], params[:, self.z_dim:]
-        sigma = softplus(sigma) + 1e-7
-        return Independent(Normal(loc=mu, scale=sigma), 1)
 
 
 def get_sizes_list(dim, chunks):
@@ -238,17 +210,11 @@ def get_chunks(x, sizes):
 
 
 class Block(nn.Module):
-    def __init__(self,
-                 input_dims,
-                 output_dim,
-                 mm_dim=1600,
-                 chunks=20,
-                 rank=15,
-                 shared=False,
-                 dropout_input=0.,
-                 dropout_pre_lin=0.,
-                 dropout_output=0.,
-                 pos_norm='before_cat'):
+    """
+    Block Fusion Mechanism
+    """
+    def __init__(self, input_dims, output_dim, mm_dim=1600, chunks=20, rank=15, shared=False, dropout_input=0.,
+                 dropout_pre_lin=0., dropout_output=0., pos_norm='before_cat'):
         super(Block, self).__init__()
         self.input_dims = input_dims
         self.output_dim = output_dim
