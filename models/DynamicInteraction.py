@@ -23,8 +23,6 @@ class DynamicInteraction_Layer0(nn.Module):
         self.num_out_path = num_out_path
         self.ric = RectifiedIdentityCell(args, num_out_path)
         self.imrc = IntraModelReasoningCell(args, num_out_path)
-        # self.glgc = GlobalLocalGuidanceCell(args, num_out_path)
-        # self.cmfc = CrossModalFusionCell(args, num_out_path)
         self.glac = GlobalLocalAlignmentCell(args, num_out_path)
         self.cmrc = CrossModalRefinementCell(args, num_out_path)
         self.crcmc = ContextRichCrossModalCell(args, num_out_path)
@@ -36,7 +34,6 @@ class DynamicInteraction_Layer0(nn.Module):
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
         emb_lst[0], path_prob[0] = self.ric(text)
-        # emb_lst[1], path_prob[1] = self.glgc(text, image)
         emb_lst[1], path_prob[1] = self.glac(text, image)
         emb_lst[2], path_prob[2] = self.imrc(text)
         emb_lst[3], path_prob[3] = self.cmrc(text, image)
@@ -80,8 +77,6 @@ class DynamicInteraction_Layer(nn.Module):
         self.num_out_path = num_out_path
 
         self.ric = RectifiedIdentityCell(args, num_out_path)
-        # self.glgc = GlobalLocalGuidanceCell(args, num_out_path)
-        # self.cmfc = CrossModalFusionCell(args, num_out_path)
         self.glac = GlobalLocalAlignmentCell(args, num_out_path)
         self.imrc = IntraModelReasoningCell(args, num_out_path)
         self.cmrc = CrossModalRefinementCell(args, num_out_path)
@@ -95,7 +90,6 @@ class DynamicInteraction_Layer(nn.Module):
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
         emb_lst[0], path_prob[0] = self.ric(ref_wrd[0])
-        # emb_lst[1], path_prob[1] = self.glgc(ref_wrd[1], image)
         emb_lst[1], path_prob[1] = self.glac(ref_wrd[1], image)
         emb_lst[2], path_prob[2] = self.imrc(ref_wrd[2])
         emb_lst[3], path_prob[3] = self.cmrc(ref_wrd[3], image)
@@ -149,8 +143,6 @@ class Reversed_DynamicInteraction_Layer0(nn.Module):
         self.num_out_path = num_out_path
         self.ric = RectifiedIdentityCell(args, num_out_path)
         self.imrc = IntraModelReasoningCell(args, num_out_path)
-        # self.glgc = GlobalLocalGuidanceCell(args, num_out_path)
-        # self.cmfc = CrossModalFusionCell(args, num_out_path)
         self.glac = GlobalLocalAlignmentCell(args, num_out_path)
         self.cmrc = CrossModalRefinementCell(args, num_out_path)
         self.crcmc = ContextRichCrossModalCell(args, num_out_path)
@@ -161,7 +153,6 @@ class Reversed_DynamicInteraction_Layer0(nn.Module):
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
         emb_lst[0], path_prob[0] = self.ric(image)
-        # emb_lst[1], path_prob[1] = self.glgc(image, text)
         emb_lst[1], path_prob[1] = self.glac(image, text)
         emb_lst[2], path_prob[2] = self.imrc(image)
         emb_lst[3], path_prob[3] = self.cmrc(image, text)
@@ -204,8 +195,6 @@ class Reversed_DynamicInteraction_Layer(nn.Module):
         self.num_out_path = num_out_path
 
         self.ric = RectifiedIdentityCell(args, num_out_path)
-        # self.glgc = GlobalLocalGuidanceCell(args, num_out_path)
-        # self.cmfc = CrossModalFusionCell(args, num_out_path)
         self.glac = GlobalLocalAlignmentCell(args, num_out_path)
         self.imrc = IntraModelReasoningCell(args, num_out_path)
         self.cmrc = CrossModalRefinementCell(args, num_out_path)
@@ -218,7 +207,6 @@ class Reversed_DynamicInteraction_Layer(nn.Module):
         path_prob = [None] * self.num_cell
         emb_lst = [None] * self.num_cell
         emb_lst[0], path_prob[0] = self.ric(ref_wrd[0])
-        # emb_lst[1], path_prob[1] = self.glgc(ref_wrd[1], text)
         emb_lst[1], path_prob[1] = self.glac(ref_wrd[1], text)
         emb_lst[2], path_prob[2] = self.imrc(ref_wrd[2])
         emb_lst[3], path_prob[3] = self.cmrc(ref_wrd[3], text)

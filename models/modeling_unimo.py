@@ -644,7 +644,7 @@ class UnimoEncoder(nn.Module):
                 return_dict=None
                 ):
 
-        assert self.vision_config.num_hidden_layers == self.text_config.num_hidden_layers
+        # assert self.vision_config.num_hidden_layers == self.text_config.num_hidden_layers
 
         all_vision_hidden_states = () if output_hidden_states else None
         all_text_hidden_states = () if output_hidden_states else None
@@ -755,7 +755,7 @@ class UnimoModel(nn.Module):
         """
         # 处理视觉数据
         vision_embedding_output = self.vision_embeddings(pixel_values)
-        vision_embedding_output = self.vision_pre_layrnorm(vision_embedding_output)
+        vision_embedding_output = self.vision_pre_layrnorm(vision_embedding_output)  # (32, 50, 768)
 
         # 处理文本数据
         input_shape = input_ids.shape
@@ -772,7 +772,7 @@ class UnimoModel(nn.Module):
 
         text_embedding_output = self.text_embeddings(input_ids=input_ids,
                                                      position_ids=position_ids,
-                                                     token_type_ids=token_type_ids)
+                                                     token_type_ids=token_type_ids)  # (32, 64, 1024) -> (32, 64, 768)
 
         encoder_text_out, encoder_vision_out = self.encoder(
             vision_embeds=vision_embedding_output,

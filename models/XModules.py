@@ -185,6 +185,9 @@ class AttentionFiltration(nn.Module):
 
 
 def get_sizes_list(dim, chunks):
+    """
+    下面的 Block 用到了
+    """
     split_size = (dim + chunks - 1) // chunks  # split_size:80
     sizes_list = [split_size] * chunks  # list:20 [80, 80, ..., 80]
     sizes_list[-1] = sizes_list[-1] - (sum(sizes_list) - dim)  # Adjust last
@@ -200,6 +203,9 @@ def get_sizes_list(dim, chunks):
 
 
 def get_chunks(x, sizes):
+    """
+    下面的 Block 用到了
+    """
     out = []
     begin = 0
     for s in sizes:

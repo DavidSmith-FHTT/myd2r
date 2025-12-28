@@ -21,19 +21,19 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
 logger = logging.getLogger(__name__)
 
 
-def set_seed(seed=2023):
-    """set random seed"""
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    np.random.seed(seed)
+def set_seed(seed):
     random.seed(seed)
+    np.random.seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.manual_seed(seed)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--bert_name', default="/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased", type=str, help="Pretrained language model path")
-    # parser.add_argument("--vit_name", default="openai/clip-vit-base-patch32", type=str, help="The name of vit")
     parser.add_argument("--vit_name", default="/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32", type=str, help="The name of vit")
     parser.add_argument('--num_epochs', default=30, type=int, help="num training epochs")
     parser.add_argument('--device', default='cuda:1', type=str, help="cuda or cpu")
@@ -78,26 +78,12 @@ def main():
 
     args = parser.parse_args()
 
-    # data_path = {
-    #     'train': 'data/MVSA-single/10-flod-1/train.json',
-    #     'dev': 'data/MVSA-single/10-flod-1/dev.json',
-    #     'test': 'data/MVSA-single/10-flod-1/test.json'
-    # }
-    # img_path = 'data/MVSA-single/data'
-
     data_path = {
         'train': 'data/MVSA-multiple/10-flod-1/train.json',
         'dev': 'data/MVSA-multiple/10-flod-1/dev.json',
         'test': 'data/MVSA-multiple/10-flod-1/test.json'
     }
     img_path = 'data/MVSA-multiple/data'
-
-    # data_path = {
-    #     'train': 'data/HFM/train.json',
-    #     'dev': 'data/HFM/valid.json',
-    #     'test': 'data/HFM/test.json'
-    # }
-    # img_path = 'data/HFM/dataset_image'
 
     data_process, dataset_class = (MSDProcessor, MSDDataset)
 
@@ -148,7 +134,6 @@ def main():
         bert = BertModel.from_pretrained(args.bert_name, cache_dir=bertBaseUncasedDir)
         clip_model_dict = clip_vit.state_dict()
         text_model_dict = bert.state_dict()
-
         # 调用trainer的train方法，传入 CLIP 视觉模型和 BERT 模型的权重字典，启动训练过程。
         trainer.train(clip_model_dict, text_model_dict)
         torch.cuda.empty_cache()
