@@ -99,6 +99,10 @@ class MSDTrainer(BaseTrainer):
                     avg_loss += loss.detach().cpu().item()  # 累加当前批次的损失
 
                     loss.backward()
+
+                    # 加梯度裁剪 -> 稳定器
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
+
                     self.optimizer.step()
                     self.scheduler.step()
                     self.optimizer.zero_grad()
@@ -271,7 +275,8 @@ class MSDTrainer(BaseTrainer):
         parameters.append(params)
 
         # 设置fc(全连接层)参数的学习率和权重衰减，这里学习率设为5e-2比其他模块高
-        params = {'lr': 5e-2, 'weight_decay': 1e-2}
+        # params = {'lr': 5e-2, 'weight_decay': 1e-2}
+        params = {'lr': 1e-3, 'weight_decay': 1e-2}
         params['params'] = []
         for name, param in self.model.named_parameters():
             # 筛选以'fc'开头的参数（全连接层）

@@ -29,12 +29,15 @@ class MSDProcessor(object):
 
     def load_from_file(self, mode="train"):
         """
-        从文件中加载数据，返回一个字典，包含提取的文本、标签和图片 ID。
+        解析 JSON 格式的数据集，从里面提取信息。
+        returns:
+            dict: 包含文本、标签和图片 ID 的字典
         """
 
         logger.info("Loading data from {}".format(self.data_path[mode]))
 
         with open(self.data_path[mode], "r", encoding="utf-8") as f:
+            # 解析 json 格式数据集
             dataset = json.load(f)  # 加载整个数据集
 
             raw_texts, raw_labels, imgs = [], [], []
