@@ -806,7 +806,8 @@ class UnimoModel(nn.Module):
         sim_vision = torch.matmul(vision_cls_output, vision_cls_output.transpose(-1, -2))  # (bsz, bsz)
 
         # JS散度 -> 双向KL散度    (bsz, bsz)
-        js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
+        # js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
+        js_loss = self.args.weight_js_1 * js_div(sim_paths, sim_text) + self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
 
         # Fusion
         text_pooled_output = self.text_pool(sim_mat[0])  # (32, 768)
