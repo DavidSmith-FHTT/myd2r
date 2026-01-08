@@ -741,6 +741,8 @@ class UnimoModel(nn.Module):
         # 跨模态融合模块
         self.block_fusion = Block([768, 768], 768)
 
+        # +++++++++++++++++
+
     def forward(self, input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 pixel_values=None, output_attentions=None, output_hidden_states=None, return_dict=None):
         """
@@ -786,18 +788,20 @@ class UnimoModel(nn.Module):
             return_dict=return_dict)
 
         # 获取编码后的文本和视觉表征（文本和图像的局部特征）
-        text_encode_out = encoder_text_out.last_hidden_state
-        vision_encode_out = encoder_vision_out.last_hidden_state
+        text_encode_out = encoder_text_out.last_hidden_state  # (B, 64, 768)
+        vision_encode_out = encoder_vision_out.last_hidden_state  # (B, 50, 768)
+
+        # +++++++++++++++++
 
         # 获取文本和视觉的 CLS 表征（文本和图像的全局特征）
         text_output = text_encode_out
         vision_output = vision_encode_out
         for text_layer_module in self.self_text:
             text_output = text_layer_module(text_output, extended_attention_mask, output_attentions=False)[0]
-        text_cls_output = self.text_cls_pool(text_output)      # (32, 768)
+        text_cls_output = self.text_cls_pool(text_output)      # (B, 768)
         for vision_layer_module in self.self_vision:
             vision_output = vision_layer_module(vision_output, output_attentions=False)[0]
-        vision_cls_output = self.vision_cls_pool(vision_output)       # (32, 768)
+        vision_cls_output = self.vision_cls_pool(vision_output)       # (B, 768)
 
         # InteractionModule
         sim_mat, sim_paths = self.itr_module(text_encode_out, vision_encode_out)
@@ -805,9 +809,9 @@ class UnimoModel(nn.Module):
         Reversed_sim_mat, Reversed_sim_paths = self.Reversed_itr_module(text_encode_out, vision_encode_out)
 
         # 池化后进行 Fusion
-        text_pooled_output = self.text_pool(sim_mat[0])  # (32, 768)
-        image_pooled_output = self.vision_pool(Reversed_sim_mat[0])  # (32, 768)
-        output = self.block_fusion([text_pooled_output, image_pooled_output])  # (bsz, 768)
+        text_pooled_output = self.text_pool(sim_mat[0])  # (B, 768)
+        image_pooled_output = self.vision_pool(Reversed_sim_mat[0])  # (B, 768)
+        output = self.block_fusion([text_pooled_output, image_pooled_output])  # (B, 768)
 
         # 计算 JS 散度损失  JS散度 -> 双向KL散度    (bsz, bsz)
         sim_text = torch.matmul(text_cls_output, text_cls_output.transpose(-1, -2))  # (bsz, bsz)
