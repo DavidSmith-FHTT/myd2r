@@ -17,14 +17,6 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
 logger = logging.getLogger(__name__)
 
 
-# def set_seed(seed=2023):
-#     """set random seed"""
-#     torch.manual_seed(seed)
-#     torch.cuda.manual_seed_all(seed)
-#     torch.backends.cudnn.deterministic = True
-#     np.random.seed(seed)
-#     random.seed(seed)
-
 def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
