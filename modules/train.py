@@ -3,18 +3,6 @@ from torch import optim
 from tqdm import tqdm
 from transformers.optimization import get_linear_schedule_with_warmup
 from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score, precision_recall_fscore_support
-import sklearn.metrics as metrics
-
-
-# def get_four_metrics(labels, predicted_labels):
-#     confusion = metrics.confusion_matrix(labels, predicted_labels)
-#     total = confusion[0][0] + confusion[0][1] + confusion[1][0] + confusion[1][1]
-#     acc = (confusion[0][0] + confusion[1][1]) / total
-#     # about sarcasm
-#     recall = confusion[1][1] / (confusion[1][1] + confusion[1][0])
-#     precision = confusion[1][1] / (confusion[1][1] + confusion[0][1])
-#     f1 = 2 * recall * precision / (recall + precision)
-#     return acc, recall, precision, f1
 
 
 def get_four_metrics(labels, predicted_labels, type='weighted'):
@@ -24,15 +12,6 @@ def get_four_metrics(labels, predicted_labels, type='weighted'):
     precision = precision_score(labels, predicted_labels, average=type)
 
     return acc, recall, precision, f1
-
-
-# def get_four_metrics(labels, predicted_labels, type='weighted'):
-#
-#     acc = accuracy_score(labels, predicted_labels)
-#     precision, recall, f1, support_macro \
-#         = precision_recall_fscore_support(labels, predicted_labels, average=type)
-#
-#     return acc, recall, precision, f1
 
 
 class BaseTrainer(object):
