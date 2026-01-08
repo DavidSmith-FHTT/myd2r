@@ -5,23 +5,17 @@ import math
 import copy
 import torch
 from torch import nn, Tensor, device
-
 from transformers.activations import ACT2FN
-
 from transformers.modeling_utils import (
     apply_chunking_to_forward,
 )
-
 from transformers.modeling_outputs import (
     BaseModelOutput,
     BaseModelOutputWithPooling
 )
 import torch.nn.functional as F
-
 from models.XModules import js_div, Block
-
 from models.InteractionModule import InteractionModule, Reversed_InteractionModule
-
 
 
 def get_extended_attention_mask(attention_mask, input_shape, device):
