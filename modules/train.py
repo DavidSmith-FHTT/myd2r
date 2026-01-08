@@ -2,7 +2,19 @@ import torch
 from torch import optim
 from tqdm import tqdm
 from transformers.optimization import get_linear_schedule_with_warmup
-from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score, classification_report
+from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score, precision_recall_fscore_support
+import sklearn.metrics as metrics
+
+
+# def get_four_metrics(labels, predicted_labels):
+#     confusion = metrics.confusion_matrix(labels, predicted_labels)
+#     total = confusion[0][0] + confusion[0][1] + confusion[1][0] + confusion[1][1]
+#     acc = (confusion[0][0] + confusion[1][1]) / total
+#     # about sarcasm
+#     recall = confusion[1][1] / (confusion[1][1] + confusion[1][0])
+#     precision = confusion[1][1] / (confusion[1][1] + confusion[0][1])
+#     f1 = 2 * recall * precision / (recall + precision)
+#     return acc, recall, precision, f1
 
 
 def get_four_metrics(labels, predicted_labels, type='weighted'):
@@ -12,6 +24,15 @@ def get_four_metrics(labels, predicted_labels, type='weighted'):
     precision = precision_score(labels, predicted_labels, average=type)
 
     return acc, recall, precision, f1
+
+
+# def get_four_metrics(labels, predicted_labels, type='weighted'):
+#
+#     acc = accuracy_score(labels, predicted_labels)
+#     precision, recall, f1, support_macro \
+#         = precision_recall_fscore_support(labels, predicted_labels, average=type)
+#
+#     return acc, recall, precision, f1
 
 
 class BaseTrainer(object):
@@ -99,10 +120,6 @@ class MSDTrainer(BaseTrainer):
                     avg_loss += loss.detach().cpu().item()  # 累加当前批次的损失
 
                     loss.backward()
-
-                    # 加梯度裁剪 -> 稳定器
-                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
-
                     self.optimizer.step()
                     self.scheduler.step()
                     self.optimizer.zero_grad()
@@ -117,7 +134,7 @@ class MSDTrainer(BaseTrainer):
                 if epoch >= self.args.eval_begin_epoch:
                     print("\n")
                     self.logger.info("save epoch {}".format(epoch))
-                    torch.save(self.model.state_dict(), self.args.save_path + "best_model.pth")
+                    torch.save(self.model.state_dict(), self.args.save_path + str(epoch) + "_best_model.pth")
                     self.logger.info("epoch {} ckpt save successful".format(epoch))
                     # self.evaluate(epoch)
                     self.test(epoch)
@@ -194,7 +211,8 @@ class MSDTrainer(BaseTrainer):
         self.logger.info("Num instance = %d", len(self.test_data) * self.args.batch_size)
         self.logger.info("Batch size = %d", self.args.batch_size)
 
-        self.args.load_path = self.args.save_path + "best_model.pth"
+        # self.args.load_path = self.args.save_path + "best_model.pth"
+        self.args.load_path = self.args.save_path + str(epoch) + "_best_model.pth"
         if self.args.load_path is not None:  # load model from load_path
             self.logger.info("Loading best model from {}".format(self.args.load_path))
             self.model.load_state_dict(torch.load(self.args.load_path))
@@ -275,8 +293,7 @@ class MSDTrainer(BaseTrainer):
         parameters.append(params)
 
         # 设置fc(全连接层)参数的学习率和权重衰减，这里学习率设为5e-2比其他模块高
-        # params = {'lr': 5e-2, 'weight_decay': 1e-2}
-        params = {'lr': 1e-3, 'weight_decay': 1e-2}
+        params = {'lr': 5e-2, 'weight_decay': 1e-2}
         params['params'] = []
         for name, param in self.model.named_parameters():
             # 筛选以'fc'开头的参数（全连接层）

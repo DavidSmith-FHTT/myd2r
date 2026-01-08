@@ -4,7 +4,7 @@ BERT 与 CLIP 的相关代码
 import math
 import copy
 import torch
-from torch import nn, Tensor, device
+from torch import nn
 from transformers.activations import ACT2FN
 from transformers.modeling_utils import (
     apply_chunking_to_forward,
@@ -13,7 +13,6 @@ from transformers.modeling_outputs import (
     BaseModelOutput,
     BaseModelOutputWithPooling
 )
-import torch.nn.functional as F
 from models.XModules import js_div, Block
 from models.InteractionModule import InteractionModule, Reversed_InteractionModule
 
@@ -80,7 +79,7 @@ def get_head_mask(
     return head_mask
 
 
-# Vision
+# CLIP
 class CLIPVisionEmbeddings(nn.Module):
     """
     CLIP Embedding from transformers (original version)
@@ -618,6 +617,12 @@ class BertCrossEncoder(nn.Module):
 
 
 class UnimoEncoder(nn.Module):
+    """
+    UnimoEncoder是D2R模型的核心双流并行编码器，通过独立的CLIPEncoderLayer视觉流和BertLayer文本流分别处理图像和文本嵌入。
+
+    return: 文本的最终隐藏状态：(batch_size, seq_length, 768)
+            视觉的最终隐藏状态：(batch_size, 50, 768)
+    """
     def __init__(self, vision_config, text_config):
         super(UnimoEncoder, self).__init__()
         self.vision_config = vision_config
@@ -707,31 +712,34 @@ class UnimoModel(nn.Module):
         self.vision_config = vision_config
         self.text_config = text_config
 
-        # vision
+        # 图像嵌入
         self.vision_embeddings = CLIPVisionEmbeddings(vision_config)
         self.vision_pre_layrnorm = nn.LayerNorm(vision_config.hidden_size)
         self.vision_post_layernorm = nn.LayerNorm(vision_config.hidden_size)
 
-        # text
+        # 文本嵌入
         self.text_embeddings = BertEmbeddings(text_config)
 
+        # 多模态编码器
         self.encoder = UnimoEncoder(vision_config, text_config)
 
-        # self-attention
-        self.self_text = nn.ModuleList([BertLayer(text_config) for _ in range(num_self_layer)])
-        self.text_cls_pool = BertPooler(text_config)
-        self.self_vision = nn.ModuleList([CLIPEncoderLayer(vision_config) for _ in range(num_self_layer)])
-        self.vision_cls_pool = BertPooler(vision_config)
-
-        self.block_fusion = Block([768, 768], 768)
-
+        # 池化模块
         self.text_pool = BertPooler(text_config)
         self.vision_pool = BertPooler(text_config)
-        
+        self.text_pooler = BertPooler(text_config) if add_pooling_layer else None
+
+        # 获取文本和视觉的 CLS 模块
+        self.self_text = nn.ModuleList([BertLayer(text_config) for _ in range(num_self_layer)])
+        self.self_vision = nn.ModuleList([CLIPEncoderLayer(vision_config) for _ in range(num_self_layer)])
+        self.text_cls_pool = BertPooler(text_config)
+        self.vision_cls_pool = BertPooler(vision_config)
+
+        # 交互模块
         self.itr_module = InteractionModule(args, num_layer_routing=args.DR_step, num_cells=6, path_hid=128)
         self.Reversed_itr_module = Reversed_InteractionModule(args, num_layer_routing=args.DR_step, num_cells=6, path_hid=128)
 
-        self.text_pooler = BertPooler(text_config) if add_pooling_layer else None
+        # 跨模态融合模块
+        self.block_fusion = Block([768, 768], 768)
 
     def forward(self, input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 pixel_values=None, output_attentions=None, output_hidden_states=None, return_dict=None):
@@ -761,13 +769,13 @@ class UnimoModel(nn.Module):
         if token_type_ids is None:
             raise ValueError("token_type_ids is None!")
 
-
         extended_attention_mask = get_extended_attention_mask(attention_mask, input_shape, device)
 
         text_embedding_output = self.text_embeddings(input_ids=input_ids,
                                                      position_ids=position_ids,
                                                      token_type_ids=token_type_ids)  # (32, 64, 1024) -> (32, 64, 768)
 
+        # 通过 BERT 和 CLIP 进行编码
         encoder_text_out, encoder_vision_out = self.encoder(
             vision_embeds=vision_embedding_output,
             text_embeds=text_embedding_output,
@@ -777,11 +785,11 @@ class UnimoModel(nn.Module):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict)
 
-        # 获取编码后的文本和视觉特征
+        # 获取编码后的文本和视觉表征（文本和图像的局部特征）
         text_encode_out = encoder_text_out.last_hidden_state
         vision_encode_out = encoder_vision_out.last_hidden_state
 
-        # 获取文本和视觉的CLS表示
+        # 获取文本和视觉的 CLS 表征（文本和图像的全局特征）
         text_output = text_encode_out
         vision_output = vision_encode_out
         for text_layer_module in self.self_text:
@@ -796,19 +804,17 @@ class UnimoModel(nn.Module):
         # Reversed_InteractionModule
         Reversed_sim_mat, Reversed_sim_paths = self.Reversed_itr_module(text_encode_out, vision_encode_out)
 
-        sim_text = torch.matmul(text_cls_output, text_cls_output.transpose(-1, -2))   # (bsz, bsz)
-        sim_vision = torch.matmul(vision_cls_output, vision_cls_output.transpose(-1, -2))  # (bsz, bsz)
-
-        # JS散度 -> 双向KL散度    (bsz, bsz)
-        # js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
-        js_loss = self.args.weight_js_1 * js_div(sim_paths, sim_text) + self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
-
-        # Fusion
+        # 池化后进行 Fusion
         text_pooled_output = self.text_pool(sim_mat[0])  # (32, 768)
         image_pooled_output = self.vision_pool(Reversed_sim_mat[0])  # (32, 768)
+        output = self.block_fusion([text_pooled_output, image_pooled_output])  # (bsz, 768)
 
-        # (bsz, 768)
-        output = self.block_fusion([text_pooled_output, image_pooled_output])
+        # 计算 JS 散度损失  JS散度 -> 双向KL散度    (bsz, bsz)
+        sim_text = torch.matmul(text_cls_output, text_cls_output.transpose(-1, -2))  # (bsz, bsz)
+        sim_vision = torch.matmul(vision_cls_output, vision_cls_output.transpose(-1, -2))  # (bsz, bsz)
+        # js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
+        js_loss = self.args.weight_js_1 * js_div(sim_paths, sim_text) + self.args.weight_js_2 * js_div(
+            Reversed_sim_paths, sim_vision)
 
         return BaseModelOutputWithPooling(
             last_hidden_state=encoder_text_out.last_hidden_state,
