@@ -10,7 +10,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="28">
+          <list size="53">
             <item index="0" class="java.lang.String" itemvalue="pytorch-pretrained-bert" />
             <item index="1" class="java.lang.String" itemvalue="transformers" />
             <item index="2" class="java.lang.String" itemvalue="matplotlib" />
@@ -39,6 +39,31 @@
             <item index="25" class="java.lang.String" itemvalue="soundfile" />
             <item index="26" class="java.lang.String" itemvalue="nvidia-nvtx-cu12" />
             <item index="27" class="java.lang.String" itemvalue="nvidia-cuda-runtime-cu12" />
+            <item index="28" class="java.lang.String" itemvalue="joblib" />
+            <item index="29" class="java.lang.String" itemvalue="threadpoolctl" />
+            <item index="30" class="java.lang.String" itemvalue="huggingface-hub" />
+            <item index="31" class="java.lang.String" itemvalue="smmap" />
+            <item index="32" class="java.lang.String" itemvalue="PyYAML" />
+            <item index="33" class="java.lang.String" itemvalue="requests" />
+            <item index="34" class="java.lang.String" itemvalue="gitdb" />
+            <item index="35" class="java.lang.String" itemvalue="importlib-metadata" />
+            <item index="36" class="java.lang.String" itemvalue="Jinja2" />
+            <item index="37" class="java.lang.String" itemvalue="fsspec" />
+            <item index="38" class="java.lang.String" itemvalue="mkl-fft" />
+            <item index="39" class="java.lang.String" itemvalue="filelock" />
+            <item index="40" class="java.lang.String" itemvalue="safetensors" />
+            <item index="41" class="java.lang.String" itemvalue="zipp" />
+            <item index="42" class="java.lang.String" itemvalue="urllib3" />
+            <item index="43" class="java.lang.String" itemvalue="itsdangerous" />
+            <item index="44" class="java.lang.String" itemvalue="Flask" />
+            <item index="45" class="java.lang.String" itemvalue="scipy" />
+            <item index="46" class="java.lang.String" itemvalue="GitPython" />
+            <item index="47" class="java.lang.String" itemvalue="Werkzeug" />
+            <item index="48" class="java.lang.String" itemvalue="packaging" />
+            <item index="49" class="java.lang.String" itemvalue="click" />
+            <item index="50" class="java.lang.String" itemvalue="regex" />
+            <item index="51" class="java.lang.String" itemvalue="idna" />
+            <item index="52" class="java.lang.String" itemvalue="Pillow" />
           </list>
         </value>
       </option>
@@ -58,6 +83,7 @@
           <option value="N806" />
           <option value="N803" />
           <option value="N811" />
+          <option value="N802" />
         </list>
       </option>
     </inspection_tool>

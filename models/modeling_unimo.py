@@ -1,6 +1,3 @@
-"""
-BERT 与 CLIP 的相关代码
-"""
 import math
 import copy
 import torch

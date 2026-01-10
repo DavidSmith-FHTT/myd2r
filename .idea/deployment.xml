@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="ningwang@10.15.14.247:12347 password (2)" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="ningwang@10.15.14.247:12347 password (2)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="Left1">
         <serverdata>
@@ -19,7 +20,7 @@
       <paths name="ningwang@10.15.14.247:12347 password (2)">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/ningwang/SSD1T/cts/model_reproduction/D2R" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/ningwang/SSD1T/cts/model_reproduction/D2R" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="new commit">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/D2R-main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/D2R-main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/HFM/test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/HFM/train.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/HFM/valid.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Router.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/modeling_unimo.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/modeling_unimo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/processor/dataset.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2vjAKUqSQmeXiPV10IiAh6VoUgv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.MLP_Communicator.executor": "Run",
+    "Python.generate_sentic_graph.executor": "Run",
+    "Python.metrics.executor": "Run",
+    "Python.run.executor": "Run",
+    "Python.runH.executor": "Run",
+    "Python.runM.executor": "Run",
+    "Python.runS.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Experiment/model_reproduction/LNLN-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.splitter.proportion": "0.2361516",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Experiment\model_reproduction\D2R-main\utils" />
+      <recent name="D:\Experiment\model_reproduction\D2R-main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.runM">
+    <configuration name="runH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runH.py" />
+      <option name="PARAMETERS" value="--num_epochs 30 --lr 2e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 64 --max_seq 64 --weight_js_1 0.6 --weight_js_2 1.0 --DR_step 3 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runH.py" />
+      <option name="PARAMETERS" value="--num_epochs 30 --lr 2e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 64 --max_seq 64 --weight_js_1 0.6 --weight_js_2 1.0 --DR_step 3 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runM" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runM.py" />
+      <option name="PARAMETERS" value="--num_epochs 30 --lr 1e-5 --warmup_ratio 0.03 --seed 2023 --batch_size 64 --max_seq 64 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 5 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runM" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runM.py" />
+      <option name="PARAMETERS" value="--num_epochs 30 --lr 2e-5 --warmup_ratio 0.03 --seed 2026 --batch_size 32 --max_seq 128 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 4 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runS.py" />
+      <option name="PARAMETERS" value="--num_epochs 20 --lr 1e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 64 --max_seq 64 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 4 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="runS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2R-main" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runS.py" />
+      <option name="PARAMETERS" value="--num_epochs 20 --lr 1e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 64 --max_seq 64 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 4 --weight_diff 0 --device cuda:1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.runH" />
+      <item itemvalue="Python.runM" />
+      <item itemvalue="Python.runS" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.runM" />
+        <item itemvalue="Python.runS" />
+        <item itemvalue="Python.runH" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.17011.127" />
+        <option value="bundled-python-sdk-48aec45f0201-7e9c3bbb6e34-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.17011.127" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="" />
+      <created>1744648046166</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744648046166</updated>
+      <workItem from="1744648047327" duration="3738000" />
+      <workItem from="1744654777862" duration="472000" />
+      <workItem from="1744696142677" duration="3495000" />
+      <workItem from="1744699725015" duration="5687000" />
+      <workItem from="1745221938606" duration="9627000" />
+      <workItem from="1745237393208" duration="10660000" />
+      <workItem from="1745289732628" duration="2533000" />
+      <workItem from="1745301420487" duration="3838000" />
+      <workItem from="1745761488885" duration="176000" />
+      <workItem from="1747627961814" duration="440000" />
+      <workItem from="1747628420338" duration="17000" />
+      <workItem from="1747628497713" duration="4945000" />
+      <workItem from="1747639800809" duration="14964000" />
+      <workItem from="1747702328424" duration="18000" />
+      <workItem from="1747811225901" duration="642000" />
+      <workItem from="1749105220001" duration="2568000" />
+      <workItem from="1749696721423" duration="1058000" />
+      <workItem from="1749706234602" duration="1081000" />
+      <workItem from="1750254668709" duration="33763000" />
+      <workItem from="1751341415764" duration="16257000" />
+      <workItem from="1751374333339" duration="2742000" />
+      <workItem from="1751377112251" duration="18795000" />
+      <workItem from="1751434209130" duration="13272000" />
+      <workItem from="1751857010667" duration="137000" />
+      <workItem from="1751971004358" duration="23544000" />
+      <workItem from="1752075739509" duration="42000" />
+      <workItem from="1752075804400" duration="47000" />
+      <workItem from="1752076873903" duration="17005000" />
+      <workItem from="1752134866292" duration="96000" />
+      <workItem from="1752135261709" duration="65000" />
+      <workItem from="1752136226276" duration="2556000" />
+      <workItem from="1752138830772" duration="4794000" />
+      <workItem from="1753754954518" duration="22000" />
+      <workItem from="1766760311483" duration="143000" />
+      <workItem from="1766760474700" duration="464000" />
+      <workItem from="1766760956414" duration="102000" />
+      <workItem from="1766761067648" duration="12285000" />
+      <workItem from="1766919607026" duration="6931000" />
+      <workItem from="1766926629163" duration="755000" />
+      <workItem from="1766927396987" duration="308000" />
+      <workItem from="1766927713110" duration="214000" />
+      <workItem from="1766928256697" duration="1565000" />
+      <workItem from="1766929835550" duration="1263000" />
+      <workItem from="1766931111658" duration="1083000" />
+      <workItem from="1766932275257" duration="721000" />
+      <workItem from="1766933018577" duration="730000" />
+      <workItem from="1766933762653" duration="47821000" />
+      <workItem from="1767337125498" duration="497000" />
+      <workItem from="1767337635353" duration="876000" />
+      <workItem from="1767338755192" duration="1028000" />
+      <workItem from="1767339808029" duration="97000" />
+      <workItem from="1767339920066" duration="2548000" />
+      <workItem from="1767343113799" duration="46000" />
+      <workItem from="1767343591832" duration="36000" />
+      <workItem from="1767346535920" duration="2770000" />
+      <workItem from="1767351483344" duration="6924000" />
+      <workItem from="1767498053644" duration="18000" />
+      <workItem from="1767665449553" duration="67331000" />
+      <workItem from="1767850617165" duration="413000" />
+      <workItem from="1767851042505" duration="386000" />
+      <workItem from="1767857939187" duration="19035000" />
+      <workItem from="1767946696230" duration="4368000" />
+      <workItem from="1767968480536" duration="952000" />
+      <workItem from="1767970546906" duration="11017000" />
+    </task>
+    <task id="LOCAL-00001" summary="first">
+      <option name="closed" value="true" />
+      <created>1750305021184</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750305021184</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first">
+      <option name="closed" value="true" />
+      <created>1750305118192</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750305118192</updated>
+    </task>
+    <task id="LOCAL-00003" summary="代码注释">
+      <option name="closed" value="true" />
+      <created>1751376803779</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751376803779</updated>
+    </task>
+    <task id="LOCAL-00004" summary="无效代码删除">
+      <option name="closed" value="true" />
+      <created>1751434258093</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751434258093</updated>
+    </task>
+    <task id="LOCAL-00005" summary="无效代码删除">
+      <option name="closed" value="true" />
+      <created>1751447121462</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751447121462</updated>
+    </task>
+    <task id="LOCAL-00006" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1766925968834</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1766925968834</updated>
+    </task>
+    <task id="LOCAL-00007" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1766931200335</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1766931200335</updated>
+    </task>
+    <task id="LOCAL-00008" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1766932366351</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1766932366351</updated>
+    </task>
+    <task id="LOCAL-00009" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1766995186251</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1766995186251</updated>
+    </task>
+    <task id="LOCAL-00010" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767108897275</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1767108897275</updated>
+    </task>
+    <task id="LOCAL-00011" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767356583122</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1767356583122</updated>
+    </task>
+    <task id="LOCAL-00012" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767839831176</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1767839831176</updated>
+    </task>
+    <task id="LOCAL-00013" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767844316294</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1767844316294</updated>
+    </task>
+    <task id="LOCAL-00014" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767849090483</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1767849090483</updated>
+    </task>
+    <task id="LOCAL-00015" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767879444002</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1767879444002</updated>
+    </task>
+    <task id="LOCAL-00016" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1767880700577</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1767880700577</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first" />
+    <MESSAGE value="代码注释" />
+    <MESSAGE value="无效代码删除" />
+    <MESSAGE value="new commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="new commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/D2R_main$runH.coverage" NAME="runH Coverage Results" MODIFIED="1767858157378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$metrics.coverage" NAME="metrics Coverage Results" MODIFIED="1752113940895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
+    <SUITE FILE_PATH="coverage/D2R_main$generate_sentic_graph.coverage" NAME="generate_sentic_graph Coverage Results" MODIFIED="1766919761726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/processor" />
+    <SUITE FILE_PATH="coverage/D2R_main$MLP_Communicator.coverage" NAME="MLP_Communicator Coverage Results" MODIFIED="1767850234841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1767880864807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$run.coverage" NAME="run Coverage Results" MODIFIED="1752117453898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1768030853149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
