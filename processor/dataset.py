@@ -112,8 +112,13 @@ class MSDDataset(Dataset):
                 image = Image.open(img_path).convert('RGB')
                 image = self.clip_processor(images=image, return_tensors='pt')['pixel_values'].squeeze()
             except:
-                img_path = os.path.join(self.img_path, 'inf.png')
-                image = Image.open(img_path).convert('RGB')
+                # 原始代码
+                # img_path = os.path.join(self.img_path, 'inf.png')
+                # image = Image.open(img_path).convert('RGB')
+                # image = self.clip_processor(images=image, return_tensors='pt')['pixel_values'].squeeze()
+
+                # 如果图像文件不存在，创建黑色占位图像
+                image = Image.new('RGB', (224, 224), (0, 0, 0))
                 image = self.clip_processor(images=image, return_tensors='pt')['pixel_values'].squeeze()
 
         img_mask = [1] * 50
