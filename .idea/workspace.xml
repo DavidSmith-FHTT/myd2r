@@ -51,7 +51,7 @@
     "Python.run.executor": "Run",
     "Python.runH.executor": "Run",
     "Python.runM.executor": "Run",
-    "Python.runS.executor": "Debug",
+    "Python.runS.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
@@ -59,13 +59,13 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Experiment/model_reproduction/D2R-main/utils",
+    "last_opened_file_path": "D:/Experiment/model_reproduction/ConFEDE-SIMS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "settings.editor.splitter.proportion": "0.2361516",
     "vue.rearranger.settings.migration": "true"
   }
@@ -76,7 +76,7 @@
       <recent name="D:\Experiment\model_reproduction\D2R-main" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.runS">
+  <component name="RunManager" selected="Python.runH">
     <configuration name="runH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="D2R-main" />
       <option name="ENV_FILES" value="" />
@@ -222,9 +222,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.runS" />
-        <item itemvalue="Python.runM" />
         <item itemvalue="Python.runH" />
+        <item itemvalue="Python.runM" />
+        <item itemvalue="Python.runS" />
       </list>
     </recent_temporary>
   </component>
@@ -312,7 +312,10 @@
       <workItem from="1768203922242" duration="11279000" />
       <workItem from="1768827136958" duration="447000" />
       <workItem from="1768827718635" duration="5142000" />
-      <workItem from="1768892810009" duration="580000" />
+      <workItem from="1768892810009" duration="4199000" />
+      <workItem from="1768972109654" duration="20701000" />
+      <workItem from="1769060433423" duration="27000" />
+      <workItem from="1769135446078" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -474,7 +477,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768893195138</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1768893406739</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1768893406739</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,12 +521,12 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/D2R_main$runH.coverage" NAME="runH Coverage Results" MODIFIED="1768208031301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runH.coverage" NAME="runH Coverage Results" MODIFIED="1769004069597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$metrics.coverage" NAME="metrics Coverage Results" MODIFIED="1752113940895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
     <SUITE FILE_PATH="coverage/D2R_main$generate_sentic_graph.coverage" NAME="generate_sentic_graph Coverage Results" MODIFIED="1766919761726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/processor" />
     <SUITE FILE_PATH="coverage/D2R_main$MLP_Communicator.coverage" NAME="MLP_Communicator Coverage Results" MODIFIED="1767850234841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1768831740237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1768999125291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$run.coverage" NAME="run Coverage Results" MODIFIED="1752117453898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1768226022485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1769000085263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
