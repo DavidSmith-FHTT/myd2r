@@ -22,4 +22,7 @@ class UnimoModelF(nn.Module):
 
         loss = self.CE_Loss(final_output, labels.long()) + js_loss
 
+        # js_loss 消融
+        # loss = self.CE_Loss(final_output, labels.long())
+
         return (loss, final_output)
