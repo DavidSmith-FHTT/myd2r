@@ -1,0 +1,137 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: runM.py (原始模型)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runM.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/Multiple/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        },
+        {
+            "name": "Python: runM_ablation_ric.py (消融RectifiedIdentityCell)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runM_ablation_ric.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/Multiple_ablation_ric/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        },
+        {
+            "name": "Python: runH.py (原始模型-HFM)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runH.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/HFM/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        },
+        {
+            "name": "Python: runH_ablation_ric.py (消融RectifiedIdentityCell-HFM)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runH_ablation_ric.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/HFM_ablation_ric/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        },
+        {
+            "name": "Python: runS.py (原始模型-MVSA-Single)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runS.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/Single/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        },
+        {
+            "name": "Python: runS_ablation_ric.py (消融RectifiedIdentityCell-MVSA-Single)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/runS_ablation_ric.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bert_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased",
+                "--vit_name", "/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/clip-vit-base-patch32",
+                "--num_epochs", "30",
+                "--device", "cuda:1",
+                "--batch_size", "32",
+                "--lr", "3e-5",
+                "--warmup_ratio", "0.01",
+                "--eval_begin_epoch", "1",
+                "--seed", "2023",
+                "--save_path", "/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/Single_ablation_ric/",
+                "--DR_step", "3",
+                "--weight_js_1", "0.1",
+                "--weight_js_2", "0.1"
+            ]
+        }
+    ]
+}
