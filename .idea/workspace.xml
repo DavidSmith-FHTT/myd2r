@@ -225,29 +225,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="t_sne" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="D2R-main" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visualization" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visualization/t_sne.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="viz_pool_out" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="D2R-main" />
       <option name="ENV_FILES" value="" />
@@ -273,7 +250,6 @@
     </configuration>
     <list>
       <item itemvalue="Python.viz_pool_out" />
-      <item itemvalue="Python.t_sne" />
       <item itemvalue="Python.runH" />
       <item itemvalue="Python.runM" />
       <item itemvalue="Python.runS" />
@@ -282,7 +258,6 @@
       <list>
         <item itemvalue="Python.viz_pool_out" />
         <item itemvalue="Python.runS" />
-        <item itemvalue="Python.t_sne" />
         <item itemvalue="Python.runH" />
         <item itemvalue="Python.runM" />
       </list>
@@ -377,7 +352,7 @@
       <workItem from="1769060433423" duration="27000" />
       <workItem from="1769135446078" duration="1148000" />
       <workItem from="1769136789024" duration="55285000" />
-      <workItem from="1769327750211" duration="12725000" />
+      <workItem from="1769327750211" duration="13428000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -611,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769409056903</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1769410402719</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1769410402719</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
