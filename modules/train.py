@@ -233,10 +233,16 @@ class MSDTrainer(BaseTrainer):
         self.model.train()
 
     def _step(self, batch, mode="train"):
-        input_ids, input_mask, segment_ids, img_mask, labels, images = batch
+        batch = list(batch)  # generator -> list
+        input_ids, input_mask, segment_ids, img_mask, labels, images = batch[:6]
 
-        outputs = self.model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=segment_ids,
-                             labels=labels, images=images)
+        outputs = self.model(
+            input_ids=input_ids,
+            attention_mask=input_mask,
+            token_type_ids=segment_ids,
+            labels=labels,
+            images=images
+        )
         return outputs, labels
 
     def multiModal_before_train(self):
