@@ -297,3 +297,35 @@ class MSDTrainer(BaseTrainer):
         #                                                  num_warmup_steps=int(
         #                                                      self.args.warmup_ratio * len(self.train_data)),
         #                                                  num_training_steps=self.train_num_steps)
+
+    def collect_pool_out(self, dataloader):
+        """
+        从指定 dataloader（dev / test）中抽取所有 pool_out 特征
+        return:
+            feats: (N, 768)
+            labels: (N,)
+        """
+        self.model.eval()
+
+        all_feats = []
+        all_labels = []
+
+        with torch.no_grad():
+            for batch in dataloader:
+                batch = (tup.to(self.args.device) if isinstance(tup, torch.Tensor) else tup
+                         for tup in batch)
+
+                # 仍然走原来的 _step，不破坏结构
+                (loss, logits), labels = self._step(batch, mode="test")
+
+                # 从 model 缓存中取 pool_out
+                pool_out = self.model.last_pool_out  # (bsz, 768)
+
+                all_feats.append(pool_out.cpu())
+                all_labels.append(labels.cpu())
+
+        self.model.train()
+
+        feats = torch.cat(all_feats, dim=0)
+        labels = torch.cat(all_labels, dim=0)
+        return feats, labels

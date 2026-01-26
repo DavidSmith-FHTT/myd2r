@@ -124,4 +124,4 @@ class MSDDataset(Dataset):
         img_mask = [1] * 50
 
         return torch.tensor(input_ids), torch.tensor(input_mask), torch.tensor(segment_ids), \
-            torch.tensor(img_mask), torch.tensor(label), image
+            torch.tensor(img_mask), torch.tensor(label), image, img

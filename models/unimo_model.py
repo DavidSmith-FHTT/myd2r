@@ -12,11 +12,14 @@ class UnimoModelF(nn.Module):
         self.model = UnimoModel(args, vision_config, text_config)
         self.fc = nn.Linear(self.text_config.hidden_size, 3)
         self.CE_Loss = CrossEntropyLoss()
+        self.last_pool_out = None
 
     def forward(self, input_ids, attention_mask, token_type_ids, labels, images):
         output, js_loss = self.model(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids,
                                      pixel_values=images, return_dict=True)
-        pool_out = output.pooler_output
+        pool_out = output.pooler_output  # 维度: (64, 768)
+        self.last_pool_out = pool_out
+
         # 分类头   (bsz, 768)  ->   (bsz, 3)
         final_output = self.fc(pool_out)
 
