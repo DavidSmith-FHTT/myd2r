@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="new commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +239,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/viz_pool_out.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="--dataset HFM --clusters 4 --lr 2e-5 --weight_js_1 0.6 --weight_js_2 1.0 --DR_step 3 --ckpt /home/ningwang/SSD1T/cts/model_reproduction/D2R/output/HFM/11_best_model.pth --device cuda:1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -352,7 +351,7 @@
       <workItem from="1769060433423" duration="27000" />
       <workItem from="1769135446078" duration="1148000" />
       <workItem from="1769136789024" duration="55285000" />
-      <workItem from="1769327750211" duration="13428000" />
+      <workItem from="1769327750211" duration="14493000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -594,7 +593,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769410402719</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1769411078155</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1769411078155</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,6 +647,6 @@
     <SUITE FILE_PATH="coverage/D2R_main$t_sne.coverage" NAME="t_sne Coverage Results" MODIFIED="1769351404004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
     <SUITE FILE_PATH="coverage/D2R_main$run.coverage" NAME="run Coverage Results" MODIFIED="1752117453898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1769161526767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/D2R_main$viz_pool_out.coverage" NAME="viz_pool_out Coverage Results" MODIFIED="1769355792875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$viz_pool_out.coverage" NAME="viz_pool_out Coverage Results" MODIFIED="1769411970368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
