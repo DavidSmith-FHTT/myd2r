@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="new commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/modeling_unimo.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/modeling_unimo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Router.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,39 +42,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.MLP_Communicator.executor": "Run",
-    "Python.generate_sentic_graph.executor": "Run",
-    "Python.metrics.executor": "Run",
-    "Python.run.executor": "Run",
-    "Python.runH.executor": "Run",
-    "Python.runM.executor": "Run",
-    "Python.runS.executor": "Debug",
-    "Python.run_visualization.executor": "Run",
-    "Python.t_sne.executor": "Run",
-    "Python.tsne_visualization.executor": "Run",
-    "Python.viz_pool_out.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Experiment/model_reproduction/LNLN-ablation",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "settings.editor.splitter.proportion": "0.2361516",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.MLP_Communicator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_sentic_graph.executor&quot;: &quot;Run&quot;,
+    &quot;Python.metrics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runM.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runS.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.run_visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.t_sne.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tsne_visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz_pool_out.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Experiment/model_reproduction/LNLN-ablation&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.2361516&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Experiment\model_reproduction\D2R-main\ablation\models" />
@@ -194,7 +194,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runS.py" />
-      <option name="PARAMETERS" value="--num_epochs 20 --lr 1e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 64 --max_seq 64 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 4 --weight_diff 0 --device cuda:1" />
+      <option name="PARAMETERS" value="--num_epochs 20 --lr 1e-5 --warmup_ratio 0.2 --seed 3407 --batch_size 16 --max_seq 64 --weight_js_1 0.9 --weight_js_2 0.3 --DR_step 4 --weight_diff 0 --device cuda:1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -356,7 +356,9 @@
       <workItem from="1769412515569" duration="9802000" />
       <workItem from="1769480051266" duration="340000" />
       <workItem from="1769676799630" duration="48000" />
-      <workItem from="1769677137939" duration="10404000" />
+      <workItem from="1769677137939" duration="12014000" />
+      <workItem from="1769698193894" duration="263000" />
+      <workItem from="1769698598679" duration="358000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -638,7 +640,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769686458239</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1769688011069</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1769688011069</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +690,7 @@
     <SUITE FILE_PATH="coverage/D2R_main$generate_sentic_graph.coverage" NAME="generate_sentic_graph Coverage Results" MODIFIED="1766919761726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/processor" />
     <SUITE FILE_PATH="coverage/D2R_main$tsne_visualization.coverage" NAME="tsne_visualization Coverage Results" MODIFIED="1769328020216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
     <SUITE FILE_PATH="coverage/D2R_main$MLP_Communicator.coverage" NAME="MLP_Communicator Coverage Results" MODIFIED="1767850234841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1769679201025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1769698811408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$t_sne.coverage" NAME="t_sne Coverage Results" MODIFIED="1769351404004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
     <SUITE FILE_PATH="coverage/D2R_main$run.coverage" NAME="run Coverage Results" MODIFIED="1752117453898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1769161526767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

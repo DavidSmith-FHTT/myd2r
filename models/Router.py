@@ -51,14 +51,17 @@ class Router(nn.Module):
 # ============================================================================
 # Soft Router (消融实验版本 - 已注释)
 # ============================================================================
+# import torch.nn.functional as F
+#
+#
 # def activateFunc(x):
 #     """
 #     Tanh  ->  ReLU
 #     """
 #     x = torch.tanh(x)
 #     return F.relu(x)
-
-
+#
+#
 # class Router(nn.Module):
 #     """
 #     return: 路径概率向量 p_m^(n-1)
