@@ -738,8 +738,6 @@ class UnimoModel(nn.Module):
         # 跨模态融合模块
         self.block_fusion = Block([768, 768], 768)
 
-        # +++++++++++++++++
-
     def forward(self, input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 pixel_values=None, output_attentions=None, output_hidden_states=None, return_dict=None):
         """
