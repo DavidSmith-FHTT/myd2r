@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="new commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/DynamicInteraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/DynamicInteraction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/InteractionModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/InteractionModule.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     "Python.run.executor": "Run",
     "Python.runH.executor": "Run",
     "Python.runM.executor": "Run",
-    "Python.runS.executor": "Run",
+    "Python.runS.executor": "Debug",
     "Python.run_visualization.executor": "Run",
     "Python.t_sne.executor": "Run",
     "Python.tsne_visualization.executor": "Run",
@@ -64,7 +65,7 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Experiment/model_reproduction/D2R-main/ablation/models",
+    "last_opened_file_path": "D:/Experiment/model_reproduction/LNLN-ablation",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,7 +87,7 @@
       <recent name="D:\Experiment\model_reproduction\D2R-main\ablation\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.runH">
+  <component name="RunManager" selected="Python.runS">
     <configuration name="runH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="D2R-main" />
       <option name="ENV_FILES" value="" />
@@ -249,15 +250,15 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.viz_pool_out" />
       <item itemvalue="Python.runH" />
       <item itemvalue="Python.runM" />
       <item itemvalue="Python.runS" />
+      <item itemvalue="Python.viz_pool_out" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.runH" />
         <item itemvalue="Python.runS" />
+        <item itemvalue="Python.runH" />
         <item itemvalue="Python.viz_pool_out" />
         <item itemvalue="Python.runM" />
       </list>
@@ -353,7 +354,10 @@
       <workItem from="1769135446078" duration="1148000" />
       <workItem from="1769136789024" duration="55285000" />
       <workItem from="1769327750211" duration="14557000" />
-      <workItem from="1769412515569" duration="858000" />
+      <workItem from="1769412515569" duration="9802000" />
+      <workItem from="1769480051266" duration="340000" />
+      <workItem from="1769676799630" duration="48000" />
+      <workItem from="1769677137939" duration="7934000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -611,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769412147622</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1769413511900</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1769413511900</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +665,7 @@
     <SUITE FILE_PATH="coverage/D2R_main$generate_sentic_graph.coverage" NAME="generate_sentic_graph Coverage Results" MODIFIED="1766919761726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/processor" />
     <SUITE FILE_PATH="coverage/D2R_main$tsne_visualization.coverage" NAME="tsne_visualization Coverage Results" MODIFIED="1769328020216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
     <SUITE FILE_PATH="coverage/D2R_main$MLP_Communicator.coverage" NAME="MLP_Communicator Coverage Results" MODIFIED="1767850234841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1769413138101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/D2R_main$runS.coverage" NAME="runS Coverage Results" MODIFIED="1769679201025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$t_sne.coverage" NAME="t_sne Coverage Results" MODIFIED="1769351404004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
     <SUITE FILE_PATH="coverage/D2R_main$run.coverage" NAME="run Coverage Results" MODIFIED="1752117453898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/D2R_main$runM.coverage" NAME="runM Coverage Results" MODIFIED="1769161526767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

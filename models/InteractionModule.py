@@ -12,7 +12,7 @@ class InteractionModule(nn.Module):
     Args:
         num_layer_routing 表示有几层
     """
-    def __init__(self, args, num_layer_routing=3, num_cells=4, path_hid=128):
+    def __init__(self, args, num_layer_routing=4, num_cells=6, path_hid=128):
         super(InteractionModule, self).__init__()
         self.args = args
         self.num_cells = num_cells

@@ -1,8 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import copy
-import pickle
 from models.Cells import RectifiedIdentityCell, IntraModelReasoningCell, CrossModalRefinementCell, GlobalLocalAlignmentCell, ContextRichCrossModalCell, GlobalEnhancedSemanticCell
 
 
@@ -41,10 +38,10 @@ class DynamicInteraction_Layer0(nn.Module):
         emb_lst[5], path_prob[5] = self.gesc(text, image)
 
         # 计算门控掩码并将所有路径概率堆叠并进行归一化，确保概率和为1
-        gate_mask = (sum(path_prob) < self.threshold).float() 
-        all_path_prob = torch.stack(path_prob, dim=2)
-        all_path_prob = all_path_prob / (all_path_prob.sum(dim=-1, keepdim=True) + self.eps)     # (64, 6, 6) -> (batch_size, path_prob_dim, num_cell)
-        path_prob = [all_path_prob[:, :, i] for i in range(all_path_prob.size(2))]  # list{6} -> (64, 6)
+        gate_mask = (sum(path_prob) < self.threshold).float() # [0., 0., 0., 0., 0., 0.]
+        all_path_prob = torch.stack(path_prob, dim=2)  # [batch_size, path_prob_dim, num_cell] -> [0.1888, 0.1880, 0.1684, 0.1700, 0.1758, 0.1655]
+        all_path_prob = all_path_prob / (all_path_prob.sum(dim=-1, keepdim=True) + self.eps)  # [0.1787, 0.1779, 0.1594, 0.1609, 0.1664, 0.1567] -> sum为1  # (64, 6, 6) -> (batch_size, path_prob_dim, num_cell)
+        path_prob = [all_path_prob[:, :, i] for i in range(all_path_prob.size(2))]  # list{6} -> (64, 6) 列表里面存的是6个Cell指向下一层各个Cell的概率
 
         # 通过加权聚合生成最终输出
         aggr_res_lst = []
@@ -96,7 +93,7 @@ class DynamicInteraction_Layer(nn.Module):
         emb_lst[4], path_prob[4] = self.crcmc(ref_wrd[4], image)
         emb_lst[5], path_prob[5] = self.gesc(ref_wrd[5], image)
 
-        # num_out_path == 1 表示最后一层
+        # num_out_path == 1 就是 DDSIM 单元的最后一层，每个 Cell 只有一条路径输出
         if self.num_out_path == 1:
             aggr_res_lst = []
             gate_mask_lst = []
