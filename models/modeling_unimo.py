@@ -754,11 +754,11 @@ class UnimoModel(nn.Module):
             output_hidden_states：一个布尔值，指示是否返回隐藏状态。
             return_dict：一个布尔值，指示是否返回一个包含额外信息（如隐藏状态和注意力）的字典。
         """
-        # 处理视觉数据
+        # ============= 处理视觉数据 =============
         vision_embedding_output = self.vision_embeddings(pixel_values)
         vision_embedding_output = self.vision_pre_layrnorm(vision_embedding_output)  # (32, 50, 768)
 
-        # 处理文本数据
+        # ============= 处理文本数据 =============
         input_shape = input_ids.shape
         batch_size, seq_length = input_shape
         device = input_ids.device
@@ -774,23 +774,14 @@ class UnimoModel(nn.Module):
                                                      position_ids=position_ids,
                                                      token_type_ids=token_type_ids)  # (32, 64, 1024) -> (32, 64, 768)
 
-        # 通过 BERT 和 CLIP 进行编码
-        encoder_text_out, encoder_vision_out = self.encoder(
-            vision_embeds=vision_embedding_output,
-            text_embeds=text_embedding_output,
-            attention_mask=extended_attention_mask,
-            head_mask=head_mask,
-            output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
-            return_dict=return_dict)
+        # ============= 通过 BERT 和 CLIP 进行编码 =============
+        encoder_text_out, encoder_vision_out = self.encoder(vision_embeds=vision_embedding_output, text_embeds=text_embedding_output, attention_mask=extended_attention_mask, head_mask=head_mask, output_attentions=output_attentions, output_hidden_states=output_hidden_states, return_dict=return_dict)
 
-        # 获取编码后的文本和视觉表征（文本和图像的局部特征）
+        # ============= 获取编码后的文本和视觉表征（文本和图像的局部特征） =============
         text_encode_out = encoder_text_out.last_hidden_state  # (B, 64, 768)
         vision_encode_out = encoder_vision_out.last_hidden_state  # (B, 50, 768)
 
-        # +++++++++++++++++
-
-        # 获取文本和视觉的 CLS 表征（文本和图像的全局特征）
+        # ============= 获取文本和视觉的 CLS 表征（文本和图像的全局特征）============
         text_output = text_encode_out
         vision_output = vision_encode_out
         for text_layer_module in self.self_text:
@@ -800,20 +791,33 @@ class UnimoModel(nn.Module):
             vision_output = vision_layer_module(vision_output, output_attentions=False)[0]
         vision_cls_output = self.vision_cls_pool(vision_output)       # (B, 768)
 
-        # InteractionModule
+        # ============= Interaction Module =============
         sim_mat, sim_paths = self.itr_module(text_encode_out, vision_encode_out)
-        # Reversed_InteractionModule
+        # ============= Reversed Interaction Module =============
         Reversed_sim_mat, Reversed_sim_paths = self.Reversed_itr_module(text_encode_out, vision_encode_out)
 
-        # 池化后进行 Fusion
+        # ============= Pooling and Fusion =============
         text_pooled_output = self.text_pool(sim_mat[0])  # (B, 768)
         image_pooled_output = self.vision_pool(Reversed_sim_mat[0])  # (B, 768)
         output = self.block_fusion([text_pooled_output, image_pooled_output])  # (B, 768)
 
-        # 计算 JS 散度损失  JS散度 -> 双向KL散度    (bsz, bsz)
+        # ============== 计算 JS 散度损失 ===============
+        # 计算文本和视觉的相似度矩阵
         sim_text = torch.matmul(text_cls_output, text_cls_output.transpose(-1, -2))  # (bsz, bsz)
         sim_vision = torch.matmul(vision_cls_output, vision_cls_output.transpose(-1, -2))  # (bsz, bsz)
-        # js_loss = - self.args.weight_js_1 * js_div(sim_paths, sim_text) - self.args.weight_js_2 * js_div(Reversed_sim_paths, sim_vision)
+
+        # 计算 JS 散度损失
+        # sim_paths: 文本→图像的跨模态路径相似度矩阵 (bsz, bsz)
+        # sim_text: 文本模态内的相似度矩阵 (bsz, bsz)
+        # Reversed_sim_paths: 图像→文本的跨模态路径相似度矩阵 (bsz, bsz)
+        # sim_vision: 视觉模态内的相似度矩阵 (bsz, bsz)
+        # 跨模态路径相似度 vs 文本模态内相似度 ---+
+        # 跨模态路径相似度 vs 视觉模态内相似度 ---+
+
+        # 一致性约束：
+        # 如果两个文本样本相似 → 它们到图像的路径概率也应该相似
+        # 如果两个图像样本相似 → 它们到文本的路径概率也应该相似
+        # 双向JS散度损失确保了模态内相似性与跨模态路径选择的一致性。防止模型过拟合、增强跨模态一致性、提高模型泛化能力
         js_loss = self.args.weight_js_1 * js_div(sim_paths, sim_text) + self.args.weight_js_2 * js_div(
             Reversed_sim_paths, sim_vision)
 

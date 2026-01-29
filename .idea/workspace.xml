@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef64574-5f0a-46fe-8d7a-62e18e4fb43f" name="Changes" comment="new commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/DynamicInteraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/DynamicInteraction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/InteractionModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/InteractionModule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/modeling_unimo.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/modeling_unimo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -357,7 +356,7 @@
       <workItem from="1769412515569" duration="9802000" />
       <workItem from="1769480051266" duration="340000" />
       <workItem from="1769676799630" duration="48000" />
-      <workItem from="1769677137939" duration="7934000" />
+      <workItem from="1769677137939" duration="8728000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -623,7 +622,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769413511900</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="new commit">
+      <option name="closed" value="true" />
+      <created>1769685466173</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1769685466173</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
