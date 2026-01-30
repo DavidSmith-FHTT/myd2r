@@ -34,12 +34,12 @@ class RouterVisualization:
         
         # Cell名称映射
         self.cell_names = [
-            'RIC\n(Identity)',
-            'GLAC\n(Global-Local)',
-            'IMRC\n(Intra-Modal)',
-            'CMRC\n(Cross-Modal)',
-            'CRCMC\n(Context-Rich)',
-            'GESC\n(Global-Enhanced)'
+            'SSRU',
+            'USRU',
+            'CLSMU',
+            'GESC',
+            'GLAC',
+            'CRCMC',
         ]
         
         # 情感类别名称
@@ -162,16 +162,16 @@ class RouterVisualization:
             
             sns.heatmap(mean_probs, 
                         annot=True, 
-                        fmt='.3f',
+                        fmt='.5f',
                         cmap='YlOrRd',
                         xticklabels=self.cell_names[:mean_probs.shape[1]],
                         yticklabels=[f'Path {i+1}' for i in range(mean_probs.shape[0])],
                         ax=ax,
                         cbar_kws={'label': 'Probability'})
             
-            ax.set_xlabel('Processing Cells', fontsize=12)
-            ax.set_ylabel('Output Paths', fontsize=12)
-            ax.set_title(f'Path Probability Distribution - {layer_name}', fontsize=14)
+            # ax.set_xlabel('Processing Cells', fontsize=12)
+            # ax.set_ylabel('Output Paths', fontsize=12)
+            # ax.set_title(f'Path Probability Distribution - {layer_name}', fontsize=14)
         
         plt.tight_layout()
         
@@ -448,10 +448,10 @@ class RouterVisualization:
             ax.scatter(routing_2d[mask, 0], routing_2d[mask, 1], 
                       c=color, label=cls_name, alpha=0.6, s=30)
         
-        ax.set_xlabel('t-SNE Dimension 1', fontsize=12)
-        ax.set_ylabel('t-SNE Dimension 2', fontsize=12)
-        ax.set_title('t-SNE Visualization of Routing Vectors', fontsize=14)
-        ax.legend(fontsize=11)
+        # ax.set_xlabel('t-SNE Dimension 1', fontsize=12)
+        # ax.set_ylabel('t-SNE Dimension 2', fontsize=12)
+        # ax.set_title('t-SNE Visualization of Routing Vectors', fontsize=14)
+        # ax.legend(fontsize=11)
         
         plt.tight_layout()
         

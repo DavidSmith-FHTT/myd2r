@@ -173,8 +173,8 @@ def collect_data(model, dataloader, device, routing_hook):
     
     with torch.no_grad():
         for batch in tqdm(dataloader, desc="Collecting routing data"):
-            # MSDDataset返回: (input_ids, input_mask, segment_ids, img_mask, label, image)
-            input_ids, attention_mask, token_type_ids, img_mask, labels, pixel_values = batch
+            # MSDDataset返回: (input_ids, input_mask, segment_ids, img_mask, label, image, img)
+            input_ids, attention_mask, token_type_ids, img_mask, labels, pixel_values, img = batch
             
             input_ids = input_ids.to(device)
             attention_mask = attention_mask.to(device)
@@ -326,7 +326,7 @@ def main():
     parser = argparse.ArgumentParser(description='Router Visualization')
     
     # 模型路径
-    parser.add_argument('--load_path', type=str, default="/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/Single/3_best_model.pth", required=False,
+    parser.add_argument('--load_path', type=str, default="/home/ningwang/SSD1T/cts/model_reproduction/D2R/output/HFM/11_best_model.pth", required=False,
                         help='Path to trained model checkpoint (.pth)')
     parser.add_argument('--bert_name', default="/home/ningwang/SSD1T/cts/MMSA/pretrained_berts/bert-base-uncased", type=str, required=False,
                         help='Path to BERT model')
@@ -334,15 +334,13 @@ def main():
                         help='Path to ViT/CLIP model')
     
     # 数据路径
-    parser.add_argument('--img_path', type=str, default='../data/MVSA-single/data',
-                        help='Path to image directory')
+    parser.add_argument('--img_path', type=str, default='../data/HFM/dataset_image', help='Path to image directory')
     
     # 其他参数
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--max_seq', type=int, default=64)
     parser.add_argument('--device', type=str, default='cuda:1')
-    parser.add_argument('--save_dir', type=str, default='./visualization/results',
-                        help='Directory to save visualizations')
+    parser.add_argument('--save_dir', type=str, default='./visualization', help='Directory to save visualizations')
     
     # 模型配置参数（需要与训练时一致）
     parser.add_argument('--seed', default=2023, type=int, help="random seed")
@@ -356,10 +354,10 @@ def main():
     parser.add_argument('--hetero', default=0.9, type=float, help="SoftContrastiveLoss")
     parser.add_argument('--homo', default=0.9, type=float, help="SoftContrastiveLoss")
     
-    parser.add_argument('--DR_step', default=4, type=int, help="Dynamic Route steps")
-    parser.add_argument('--weight_js_1', default=0.9, type=float, help="JS divergence")
-    parser.add_argument('--weight_js_2', default=0.3, type=float, help="JS divergence")
-    parser.add_argument('--weight_diff', default=0.1, type=float, help="diff_loss")
+    parser.add_argument('--DR_step', default=3, type=int, help="Dynamic Route steps")
+    parser.add_argument('--weight_js_1', default=0.6, type=float, help="JS divergence")
+    parser.add_argument('--weight_js_2', default=1.0, type=float, help="JS divergence")
+    parser.add_argument('--weight_diff', default=0, type=float, help="diff_loss")
     
     parser.add_argument('--embed_size', default=768, type=int, help='Dimensionality of the joint embedding.')
     parser.add_argument('--num_head_IMRC', type=int, default=16, help='Number of heads in Intra-Modal Reasoning Cell')
@@ -390,10 +388,15 @@ def main():
     print("\nLoading test data...")
     
     # 数据路径字典
+    # data_path = {
+    #     'train': '../data/MVSA-single/10-flod-1/train.json',
+    #     'dev': '../data/MVSA-single/10-flod-1/dev.json',
+    #     'test': '../data/MVSA-single/10-flod-1/test.json'
+    # }
     data_path = {
-        'train': '../data/MVSA-single/10-flod-1/train.json',
-        'dev': '../data/MVSA-single/10-flod-1/dev.json',
-        'test': '../data/MVSA-single/10-flod-1/test.json'
+        'train': '../data/HFM/train.json',
+        'dev': '../data/HFM/valid.json',
+        'test': '../data/HFM/test.json'
     }
     
     # 加载CLIP processor
