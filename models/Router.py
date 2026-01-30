@@ -7,7 +7,10 @@ import torch.nn as nn
 # ============================================================================
 class Router(nn.Module):
     """
-    Sentiment-Aware Router
+    Attention-Weighted Router(注意力加权路由器) for Dynamic Path Selection.
+    Uses attention pooling to weight sequence importance for routing decisions.
+
+    Sentiment-Aware Router.
     return: 路径概率向量 p_m^(n-1)
     """
 
@@ -38,11 +41,25 @@ class Router(nn.Module):
         """
         输入 x 通过注意力池化得到全局表示，然后经 MLP 转换为路径 logits，
         最后通过 softmax 得到可解释的路径概率。
+        核心目的:
+        1. 信息聚合
+        将序列中所有位置的信息压缩成一个固定长度的向量
+        2. 重要性加权
+        不是简单平均，而是根据注意力权重进行加权聚合：重要信息贡献更大,冗余信息贡献较小
+        3. 维度统一
+        为后续的MLP分类器提供固定维度的输入
+
+        直观理解
+        想象一个句子："这部电影非常精彩"
+        传统平均：每个词权重相同
+        注意力池化："精彩"权重最大，"非常"次之，"这部电影"权重较小
+        这样得到的特征向量更能抓住句子的核心语义，为路由决策提供更准确的依据。
         """
-        # 注意力权重计算
-        attn_scores = self.pool(x).squeeze(-1)
-        attn_weights = torch.softmax(attn_scores, dim=-1)
-        # 全局表示
+        # 序列到标量的映射
+        attn_scores = self.pool(x).squeeze(-1) 
+        # 归一化为权重
+        attn_weights = torch.softmax(attn_scores, dim=-1)  
+        # 加权求和得到全局表示。将所有位置的特征聚合成一个向量
         pooled = torch.sum(attn_weights.unsqueeze(-1) * x, dim=-2)
         # 路径 logits
         logits = self.mlp(pooled)
