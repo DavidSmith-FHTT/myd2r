@@ -39,9 +39,12 @@ class Router(nn.Module):
         输入 x 通过注意力池化得到全局表示，然后经 MLP 转换为路径 logits，
         最后通过 softmax 得到可解释的路径概率。
         """
+        # 注意力权重计算
         attn_scores = self.pool(x).squeeze(-1)
         attn_weights = torch.softmax(attn_scores, dim=-1)
+        # 全局表示
         pooled = torch.sum(attn_weights.unsqueeze(-1) * x, dim=-2)
+        # 路径 logits
         logits = self.mlp(pooled)
         logits = logits / max(self.temperature, 1e-6)
 
