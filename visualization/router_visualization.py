@@ -37,9 +37,9 @@ class RouterVisualization:
             'SSRU',
             'USRU',
             'CLSMU',
-            'GESC',
-            'GLAC',
-            'CRCMC',
+            'CGSAU',
+            'GLSFU',
+            'MVSMU',
         ]
         
         # 情感类别名称
